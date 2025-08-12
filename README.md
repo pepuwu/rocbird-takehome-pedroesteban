@@ -1,8 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Rocbird takehome Fullstack/Heavy backend dev
 
-## Getting Started
+Este proyecto base es un starter kit para que puedas demostrar tus habilidades tecnicas en como fullstack con tecnologías modernas.  
+Aquí tendrás que implementar y extender funcionalidades usando Next.js con TypeScript, Prisma y una UI base con shadcn y TailwindCSS.
 
-First, run the development server:
+El objetivo principal es evaluar la capacidad del postulante para diseñar APIs limpias, manejar base de datos con Prisma ORM, crear interfaces eficientes, escalables, fuertemente tipadas y correctamente estructuradas.
+
+El tiempo para resolver este takehome sera de 5 dias desde el dia en el que se comparta el repo para ser clonado.
+
+---
+
+## Puntos a resolver
+
+1. **CRUD completo de usuarios**  
+   Implementar las operaciones Create, Read, Update y Delete para el modelo User usando Prisma y exponerlos a través de rutas API de Next.js (app router).  
+   La UI deberá permitir listar, crear, editar y eliminar usuarios.
+
+2. **Validación y manejo de errores**  
+   Asegurar que la API y la UI manejan correctamente casos de error y validaciones básicas (ej: email único, campos requeridos).
+
+3. **Consumo eficiente de la base de datos**  
+   Usar Prisma con buenas prácticas para consultas y manejo de datos, optimizando cuando sea posible.
+
+4. **Uso de componentes UI reutilizables**  
+   Usar componentes de shadcn/ui para la interfaz, manteniendo un diseño limpio, atractivo y escalable.
+
+5. **Configuración y documentación clara**  
+   Asegurarse de que el proyecto pueda ser clonado, instalado y ejecutado fácilmente siguiendo el README
+
+---
+
+## Instalar los paquetes necesarios: 
+
+```bash
+npm install
+# or
+pnpm install
+# or
+yarn install
+```
+
+## Ejecutar entorno
+
+Ejecutar el server dev:
 
 ```bash
 npm run dev
@@ -14,23 +53,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Abre [http://localhost:3000] en tu navegador para ver el resultado.
