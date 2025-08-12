@@ -20,6 +20,7 @@ El tiempo para resolver este takehome sera de 5 dias desde el dia en el que se c
 
 3. **Consumo eficiente de la base de datos**  
    Usar Prisma con buenas prácticas para consultas y manejo de datos, optimizando cuando sea posible.
+   Manejar transacciones con prisma.$transaction en operaciones múltiples.
 
 4. **Uso de componentes UI reutilizables**  
    Usar componentes de shadcn/ui para la interfaz, manteniendo un diseño limpio, atractivo y escalable.
@@ -27,7 +28,16 @@ El tiempo para resolver este takehome sera de 5 dias desde el dia en el que se c
 5. **Configuración y documentación clara**  
    Asegurarse de que el proyecto pueda ser clonado, instalado y ejecutado fácilmente siguiendo el README
 
+6. **Uso de componentes UI reutilizables (composición)**
+   Seguir un patrón de UI consistente (botones, inputs, modal de confirmación).
+
 ---
+
+## Extra points : 
+
+- Levantar una base de datos y conectarla con Prisma (puede ser con Docker + Postgres).
+- Añadir un .env.example y explicar cómo levantar base de datos.
+- Testing unitario de funcionalidades criticas.
 
 ## Instalar los paquetes necesarios: 
 
