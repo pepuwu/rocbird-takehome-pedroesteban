@@ -14,9 +14,9 @@ El tiempo para resolver este takehome será de **7 días** desde el día en el q
 
 ## Puntos a resolver
 
-1. **CRUD completo de usuarios**  
+1. **CRUD completo de talentos**  
    - Implementar las operaciones Create, Read, Update y Delete para el modelo `Talento` usando Prisma y exponerlos a través de rutas API de Next.js (App Router).  
-   - La UI deberá permitir listar, crear, editar y eliminar usuarios.  
+   - La UI deberá permitir listar, crear, editar y eliminar talentos.  
    - Usar rutas dinámicas (`app/talentos/[id]`) y soportar query params para filtrado y paginación (`/talentos?page=2&sort=asc`).
 
 2. **Validación y manejo de errores**  
