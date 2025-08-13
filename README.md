@@ -1,43 +1,75 @@
-## Rocbird takehome Fullstack/Heavy backend dev
+# Rocbird takehome Fullstack/Heavy backend dev
 
-Este proyecto base es un starter kit para que puedas demostrar tus habilidades tecnicas en como fullstack con tecnologías modernas.  
-Aquí tendrás que implementar y extender funcionalidades usando Next.js con TypeScript, Prisma y una UI base con shadcn y TailwindCSS.
+Este proyecto base es un starter kit para que puedas demostrar tus habilidades técnicas como fullstack con tecnologías modernas.  
+Aquí tendrás que implementar y extender funcionalidades usando **Next.js v15**, **TypeScript**, **Prisma ORM** y una UI base con **shadcn** y **TailwindCSS**.
 
-El objetivo principal es evaluar la capacidad del postulante para diseñar APIs limpias, manejar base de datos con Prisma ORM, crear interfaces eficientes, escalables, fuertemente tipadas y correctamente estructuradas.
+El objetivo principal es evaluar la capacidad del postulante para:  
+- Diseñar **APIs limpias** y seguras.  
+- Manejar base de datos con Prisma ORM aplicando buenas prácticas.  
+- Crear interfaces eficientes, escalables, fuertemente tipadas y correctamente estructuradas.  
 
-El tiempo para resolver este takehome sera de 5 dias desde el dia en el que se comparta el repo para ser clonado.
+El tiempo para resolver este takehome será de **7 días** desde el día en el que se comparta el repo para ser clonado.
 
 ---
 
 ## Puntos a resolver
 
 1. **CRUD completo de usuarios**  
-   Implementar las operaciones Create, Read, Update y Delete para el modelo User usando Prisma y exponerlos a través de rutas API de Next.js (app router).  
-   La UI deberá permitir listar, crear, editar y eliminar usuarios.
+   - Implementar las operaciones Create, Read, Update y Delete para el modelo `User` usando Prisma y exponerlos a través de rutas API de Next.js (App Router).  
+   - La UI deberá permitir listar, crear, editar y eliminar usuarios.  
+   - Usar rutas dinámicas (`app/users/[id]`) y soportar query params para filtrado y paginación (`/users?page=2&sort=asc`).
 
 2. **Validación y manejo de errores**  
-   Asegurar que la API y la UI manejan correctamente casos de error y validaciones básicas (ej: email único, campos requeridos).
+   - Validar en backend con **Zod** o similar, asegurando tipado estricto entre backend y frontend.  
+   - Validar unicidad de email, campos requeridos, formatos y devolver códigos HTTP correctos.  
+   - Mostrar mensajes claros y amigables en UI (toast, alert).
 
 3. **Consumo eficiente de la base de datos**  
-   Usar Prisma con buenas prácticas para consultas y manejo de datos, optimizando cuando sea posible.
-   Manejar transacciones con prisma.$transaction en operaciones múltiples.
+   - Usar `select` / `include` para traer solo datos necesarios.  
+   - Implementar paginación con `skip` / `take`.  
+   - Evitar N+1 queries con relaciones bien definidas.  
+   - Manejar transacciones con `prisma.$transaction` para operaciones múltiples.
 
 4. **Uso de componentes UI reutilizables**  
-   Usar componentes de shadcn/ui para la interfaz, manteniendo un diseño limpio, atractivo y escalable.
+   - Usar componentes de `shadcn/ui` para formularios, tablas, modales y toasts.  
+   - Seguir un patrón consistente de estilos y estructura.  
+   - Componer componentes genéricos que puedan adaptarse a distintos casos.
 
 5. **Configuración y documentación clara**  
-   Asegurarse de que el proyecto pueda ser clonado, instalado y ejecutado fácilmente siguiendo el README
+   - Proyecto listo para clonar y correr con instrucciones claras.  
+   - Scripts útiles (`db:push`, `db:seed`, `lint`, `format`).  
+   - `.env.example` documentado.
 
-6. **Uso de componentes UI reutilizables (composición)**
-   Seguir un patrón de UI consistente (botones, inputs, modal de confirmación).
+6. **Modelado y seed de base de datos para herramienta de gestión de talentos**  
+   - Levantar una base de datos **PostgreSQL local** (recomendado: Docker + Postgres).  
+   - Conectarla al backend mediante Prisma.  
+   - Crear un **seed inicial** que incluya las siguientes tablas y relaciones:
+     - **talento**: Representa a una persona candidata o parte del staff.  
+     - **referente_tecnico**: Puede actuar como **líder** y/o **mentor** de uno o varios talentos.  
+       - Un talento puede tener **líder** y/o **mentor** (pueden ser la misma persona o distintas).  
+       - Un referente técnico puede tener múltiples talentos a cargo.  
+     - **interaccion**: Registro de interacciones de un talento (entrevistas, reuniones, feedback).  
+       - Un talento puede tener múltiples interacciones.
+   - Documentar el esquema y sus relaciones en el README o en `prisma/schema.prisma`.  
 
 ---
 
-## Extra points : 
+## Puntos extra (opcionales):
 
-- Levantar una base de datos y conectarla con Prisma (puede ser con Docker + Postgres).
-- Añadir un .env.example y explicar cómo levantar base de datos.
-- Testing unitario de funcionalidades criticas.
+- Utilizar Docker.  
+- Testing unitario de funcionalidades críticas.  
+
+---
+
+## Instalar los paquetes necesarios
+
+```bash
+npm install
+# or
+pnpm install
+# or
+yarn install
+
 
 ## Instalar los paquetes necesarios: 
 
