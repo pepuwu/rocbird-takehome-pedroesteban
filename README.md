@@ -1,6 +1,6 @@
 # Rocbird takehome Fullstack/Heavy backend dev
 
-Este proyecto base es un starter kit para que puedas demostrar tus habilidades técnicas como fullstack con tecnologías modernas.  
+Este proyecto base es un starter kit enfocadao a una herramienta interna para control de staffing de talentos para que puedas demostrar tus habilidades técnicas como fullstack orientado fuertemente a backend con tecnologías modernas.  
 Aquí tendrás que implementar y extender funcionalidades usando **Next.js v15**, **TypeScript**, **Prisma ORM** y una UI base con **shadcn** y **TailwindCSS**.
 
 El objetivo principal es evaluar la capacidad del postulante para:  
@@ -15,9 +15,9 @@ El tiempo para resolver este takehome será de **7 días** desde el día en el q
 ## Puntos a resolver
 
 1. **CRUD completo de usuarios**  
-   - Implementar las operaciones Create, Read, Update y Delete para el modelo `User` usando Prisma y exponerlos a través de rutas API de Next.js (App Router).  
+   - Implementar las operaciones Create, Read, Update y Delete para el modelo `Talento` usando Prisma y exponerlos a través de rutas API de Next.js (App Router).  
    - La UI deberá permitir listar, crear, editar y eliminar usuarios.  
-   - Usar rutas dinámicas (`app/users/[id]`) y soportar query params para filtrado y paginación (`/users?page=2&sort=asc`).
+   - Usar rutas dinámicas (`app/talentos/[id]`) y soportar query params para filtrado y paginación (`/talentos?page=2&sort=asc`).
 
 2. **Validación y manejo de errores**  
    - Validar en backend con **Zod** o similar, asegurando tipado estricto entre backend y frontend.  
