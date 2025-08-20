@@ -7,16 +7,93 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+// ========================================
+// SCHEMA PARA SISTEMA DE GESTIÓN DE TALENTOS
+// ========================================
 
-// schema
+model Talento {
+  id                String   @id @default(cuid())
+  nombre_y_apellido String
+  seniority         Seniority
+  rol               String
+  estado            EstadoTalento @default(ACTIVO)
+  fecha_creacion    DateTime @default(now())
+  fecha_actualizacion DateTime @updatedAt
+  
+  // Relaciones
+  lider_id          String?
+  mentor_id         String?
+  lider             ReferenteTecnico? @relation("LiderTalento", fields: [lider_id], references: [id])
+  mentor            ReferenteTecnico? @relation("MentorTalento", fields: [mentor_id], references: [id])
+  interacciones     Interaccion[]
+  
+  @@map("talentos")
+}
 
+model ReferenteTecnico {
+  id                String   @id @default(cuid())
+  nombre_y_apellido String
+  email             String   @unique
+  especialidad      String?
+  fecha_creacion    DateTime @default(now())
+  fecha_actualizacion DateTime @updatedAt
+  
+  // Relaciones
+  talentos_liderados Talento[] @relation("LiderTalento")
+  talentos_mentoreados Talento[] @relation("MentorTalento")
+  
+  @@map("referentes_tecnicos")
+}
 
-// definir schemas de users y posts
-// tener todo tipado (types.ts)
+model Interaccion {
+  id                    String   @id @default(cuid())
+  tipo_de_interaccion   TipoInteraccion
+  fecha                 DateTime @default(now())
+  detalle               String
+  estado                EstadoInteraccion @default(INICIADA)
+  fecha_de_modificacion DateTime @updatedAt
+  
+  // Relaciones
+  talento_id            String
+  talento               Talento @relation(fields: [talento_id], references: [id], onDelete: Cascade)
+  
+  @@map("interacciones")
+}
 
+// ========================================
+// ENUMS
+// ========================================
 
-// post, get, patch/update (typo date)
+enum Seniority {
+  JUNIOR
+  SEMI_SENIOR
+  SENIOR
+  LEAD
+  ARCHITECT
+}
+
+enum EstadoTalento {
+  ACTIVO
+  INACTIVO
+}
+
+enum TipoInteraccion {
+  REUNION_1_1
+  CODE_REVIEW
+  MENTORIA
+  EVALUACION
+  FEEDBACK
+  CAPACITACION
+  OTRO
+}
+
+enum EstadoInteraccion {
+  INICIADA
+  EN_PROGRESO
+  FINALIZADA
+  CANCELADA
+}
