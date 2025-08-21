@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useDebounce } from "../../hooks/useDebounce";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -70,6 +71,9 @@ export default function TalentosPage() {
   const [seniorityFilter, setSeniorityFilter] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [meta, setMeta] = useState<ApiResponse["meta"] | null>(null);
+  
+  // Debounce para la búsqueda (espera 500ms después de que el usuario deje de escribir)
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   // Función para cargar talentos
   const loadTalentos = async () => {
@@ -79,7 +83,7 @@ export default function TalentosPage() {
       const params = new URLSearchParams({
         page: currentPage.toString(),
         limit: "10",
-        ...(searchTerm && { search: searchTerm }),
+        ...(debouncedSearchTerm && { search: debouncedSearchTerm }),
         ...(estadoFilter !== "all" && { estado: estadoFilter }),
         ...(seniorityFilter !== "all" && { seniority: seniorityFilter }),
       });
@@ -103,7 +107,14 @@ export default function TalentosPage() {
   // Cargar talentos al montar el componente o cambiar filtros
   useEffect(() => {
     loadTalentos();
-  }, [currentPage, searchTerm, estadoFilter, seniorityFilter]);
+  }, [currentPage, debouncedSearchTerm, estadoFilter, seniorityFilter]);
+
+  // Reset página cuando cambian los filtros
+  useEffect(() => {
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    }
+  }, [debouncedSearchTerm, estadoFilter, seniorityFilter]);
 
   // Función para eliminar talento
   const handleDelete = async (id: string) => {
