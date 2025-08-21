@@ -61,38 +61,142 @@ El tiempo para resolver este takehome será de **7 días** desde el día en el q
 
 ---
 
-## Instalar los paquetes necesarios
+## 🚀 Instalación y Setup
 
+### 1. Clonar e instalar dependencias
 ```bash
+git clone <tu-repo-url>
+cd rocbird-takehome
+git checkout develop
 npm install
-# or
-pnpm install
-# or
-yarn install
-
-
-## Instalar los paquetes necesarios: 
-
-```bash
-npm install
-# or
-pnpm install
-# or
-yarn install
 ```
 
-## Ejecutar entorno
+### 2. Configurar PostgreSQL
+```bash
+# macOS con Homebrew
+brew install postgresql@15
+brew services start postgresql@15
+createdb rocbird_takehome
 
-Ejecutar el server dev:
+# O con Docker
+docker run --name postgres-rocbird \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=rocbird_takehome \
+  -p 5432:5432 -d postgres:15
+```
 
+### 3. Configurar variables de entorno
+Crear archivo `.env` en la raíz del proyecto:
+```bash
+# Para usuario local sin contraseña
+DATABASE_URL="postgresql://tu_usuario@localhost:5432/rocbird_takehome"
+
+# Para Docker
+DATABASE_URL="postgresql://postgres:password@localhost:5432/rocbird_takehome"
+```
+
+### 4. Configurar base de datos
+```bash
+npx prisma generate
+npx prisma db push
+npm run db:seed
+```
+
+### 5. Ejecutar el proyecto
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Abre [http://localhost:3000] en tu navegador para ver el resultado.
+
+## 📊 Scripts Útiles
+```bash
+npm run dev          # Servidor de desarrollo
+npm run db:push      # Sincronizar schema con DB
+npm run db:seed      # Poblar con datos de ejemplo  
+npm run db:studio    # Abrir Prisma Studio
+npm run db:reset     # Reset completo + seed
+```
+
+## 🗄️ Documentación del Schema
+
+### Entidades y Relaciones
+
+#### **Talento**
+```prisma
+model Talento {
+  id                String   @id @default(cuid())
+  nombre_y_apellido String
+  seniority         Seniority // JUNIOR, SEMI_SENIOR, SENIOR, LEAD, ARCHITECT
+  rol               String
+  estado            EstadoTalento @default(ACTIVO) // ACTIVO, INACTIVO
+  fecha_creacion    DateTime @default(now())
+  fecha_actualizacion DateTime @updatedAt
+  
+  // Relaciones opcionales
+  lider_id          String?
+  mentor_id         String?
+  lider             ReferenteTecnico? @relation("LiderTalento")
+  mentor            ReferenteTecnico? @relation("MentorTalento")
+  interacciones     Interaccion[]
+}
+```
+
+#### **ReferenteTecnico**
+```prisma
+model ReferenteTecnico {
+  id                String   @id @default(cuid())
+  nombre_y_apellido String
+  email             String   @unique
+  especialidad      String?
+  fecha_creacion    DateTime @default(now())
+  fecha_actualizacion DateTime @updatedAt
+  
+  // Relaciones - Un referente puede liderar/mentorar múltiples talentos
+  talentos_liderados    Talento[] @relation("LiderTalento")
+  talentos_mentoreados  Talento[] @relation("MentorTalento")
+}
+```
+
+#### **Interaccion**
+```prisma
+model Interaccion {
+  id                    String   @id @default(cuid())
+  tipo_de_interaccion   TipoInteraccion // REUNION_1_1, CODE_REVIEW, MENTORIA, etc.
+  fecha                 DateTime @default(now())
+  detalle               String
+  estado                EstadoInteraccion @default(INICIADA) // INICIADA, EN_PROGRESO, FINALIZADA
+  fecha_de_modificacion DateTime @updatedAt
+  
+  // Relación - Una interacción pertenece a un talento
+  talento_id            String
+  talento               Talento @relation(fields: [talento_id], references: [id], onDelete: Cascade)
+}
+```
+
+### Datos de Ejemplo
+El seed crea:
+- **4 referentes técnicos** (Ana García, Carlos Rodríguez, María López, Diego Fernández)
+- **6 talentos** con diferentes roles y seniorities
+- **19 interacciones** de diferentes tipos
+
+## 🎯 APIs Implementadas
+
+### Talentos
+- `GET /api/talentos` - Listar con filtros y paginación
+- `GET /api/talentos/[id]` - Obtener por ID
+- `POST /api/talentos` - Crear nuevo
+- `PUT /api/talentos/[id]` - Actualizar
+- `DELETE /api/talentos/[id]` - Eliminar
+
+### Referentes Técnicos
+- `GET /api/referentes-tecnicos` - Listar todos
+- `POST /api/referentes-tecnicos` - Crear nuevo
+
+### Interacciones
+- `GET /api/interacciones` - Listar todas (filtro por talento_id)
+- `POST /api/interacciones` - Crear nueva
+- `PUT /api/interacciones/[id]` - Actualizar estado
+
+### Sistema
+- `GET /api/health` - Estado de la API y DB
