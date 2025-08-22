@@ -114,8 +114,8 @@ export default function NuevoTalentoPage() {
         seniority: formData.seniority,
         rol: formData.rol.trim(),
         estado: formData.estado,
-        ...(formData.lider_id && { lider_id: formData.lider_id }),
-        ...(formData.mentor_id && { mentor_id: formData.mentor_id }),
+        ...(formData.lider_id && formData.lider_id !== "none" && { lider_id: formData.lider_id }),
+        ...(formData.mentor_id && formData.mentor_id !== "none" && { mentor_id: formData.mentor_id }),
       };
 
       const response = await fetch("/api/talentos", {
@@ -260,7 +260,7 @@ export default function NuevoTalentoPage() {
                           <SelectValue placeholder="Selecciona líder" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">Sin líder asignado</SelectItem>
+                          <SelectItem value="none">Sin líder asignado</SelectItem>
                           {referentes.map((referente) => (
                             <SelectItem key={referente.id} value={referente.id}>
                               {referente.nombre_y_apellido} - {referente.especialidad}
@@ -280,7 +280,7 @@ export default function NuevoTalentoPage() {
                           <SelectValue placeholder="Selecciona mentor" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">Sin mentor asignado</SelectItem>
+                          <SelectItem value="none">Sin mentor asignado</SelectItem>
                           {referentes.map((referente) => (
                             <SelectItem key={referente.id} value={referente.id}>
                               {referente.nombre_y_apellido} - {referente.especialidad}
