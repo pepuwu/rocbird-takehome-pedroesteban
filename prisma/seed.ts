@@ -46,6 +46,7 @@ async function main() {
   // Crear talentos
   const talentos = await prisma.talento.createMany({
     data: [
+      // Frontend Team
       {
         nombre_y_apellido: 'Juan Pérez',
         seniority: Seniority.JUNIOR,
@@ -55,6 +56,24 @@ async function main() {
         mentor_id: ana.id,
       },
       {
+        nombre_y_apellido: 'Valentina Castro',
+        seniority: Seniority.JUNIOR,
+        rol: 'React Developer',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: ana.id,
+        mentor_id: ana.id,
+      },
+      {
+        nombre_y_apellido: 'Matías González',
+        seniority: Seniority.SEMI_SENIOR,
+        rol: 'Frontend Developer',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: ana.id,
+        mentor_id: diego.id,
+      },
+      
+      // Backend Team
+      {
         nombre_y_apellido: 'Laura Martínez',
         seniority: Seniority.SEMI_SENIOR,
         rol: 'Backend Developer',
@@ -62,6 +81,24 @@ async function main() {
         lider_id: carlos.id,
         mentor_id: diego.id,
       },
+      {
+        nombre_y_apellido: 'Santiago Rivera',
+        seniority: Seniority.JUNIOR,
+        rol: 'Node.js Developer',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: carlos.id,
+        mentor_id: carlos.id,
+      },
+      {
+        nombre_y_apellido: 'Isabella Moreno',
+        seniority: Seniority.SENIOR,
+        rol: 'Backend Architect',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: carlos.id,
+        mentor_id: diego.id,
+      },
+      
+      // Full Stack Team
       {
         nombre_y_apellido: 'Roberto Silva',
         seniority: Seniority.SENIOR,
@@ -71,6 +108,16 @@ async function main() {
         mentor_id: carlos.id,
       },
       {
+        nombre_y_apellido: 'Camila Vargas',
+        seniority: Seniority.SEMI_SENIOR,
+        rol: 'Full Stack Developer',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: diego.id,
+        mentor_id: diego.id,
+      },
+      
+      // QA Team
+      {
         nombre_y_apellido: 'Carmen Torres',
         seniority: Seniority.JUNIOR,
         rol: 'QA Tester',
@@ -79,19 +126,99 @@ async function main() {
         mentor_id: maria.id,
       },
       {
-        nombre_y_apellido: 'Andrés Morales',
-        seniority: Seniority.LEAD,
-        rol: 'Tech Lead',
+        nombre_y_apellido: 'Alejandro Ruiz',
+        seniority: Seniority.SEMI_SENIOR,
+        rol: 'QA Automation Engineer',
         estado: EstadoTalento.ACTIVO,
-        lider_id: diego.id,
+        lider_id: maria.id,
+        mentor_id: maria.id,
       },
+      
+      // DevOps Team
       {
         nombre_y_apellido: 'Sofía Herrera',
         seniority: Seniority.SEMI_SENIOR,
         rol: 'DevOps Engineer',
-        estado: EstadoTalento.INACTIVO,
+        estado: EstadoTalento.ACTIVO, // Cambié a ACTIVO
         lider_id: maria.id,
         mentor_id: maria.id,
+      },
+      {
+        nombre_y_apellido: 'Nicolás Mendoza',
+        seniority: Seniority.SENIOR,
+        rol: 'Cloud Engineer',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: maria.id,
+        mentor_id: diego.id,
+      },
+      
+      // Leads y Seniors
+      {
+        nombre_y_apellido: 'Andrés Morales',
+        seniority: Seniority.LEAD,
+        rol: 'Tech Lead Frontend',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: diego.id,
+      },
+      {
+        nombre_y_apellido: 'Fernanda López',
+        seniority: Seniority.LEAD,
+        rol: 'Tech Lead Backend',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: diego.id,
+      },
+      {
+        nombre_y_apellido: 'Gabriel Jiménez',
+        seniority: Seniority.ARCHITECT,
+        rol: 'Software Architect',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: diego.id,
+      },
+      
+      // Algunos inactivos
+      {
+        nombre_y_apellido: 'Marina Vega',
+        seniority: Seniority.JUNIOR,
+        rol: 'Frontend Developer',
+        estado: EstadoTalento.INACTIVO,
+        lider_id: ana.id,
+        mentor_id: ana.id,
+      },
+      {
+        nombre_y_apellido: 'Tomás Acosta',
+        seniority: Seniority.SEMI_SENIOR,
+        rol: 'Backend Developer',
+        estado: EstadoTalento.INACTIVO,
+        lider_id: carlos.id,
+        mentor_id: carlos.id,
+      },
+      
+      // Mobile Team
+      {
+        nombre_y_apellido: 'Lucía Fernández',
+        seniority: Seniority.SEMI_SENIOR,
+        rol: 'Mobile Developer (React Native)',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: ana.id,
+        mentor_id: diego.id,
+      },
+      {
+        nombre_y_apellido: 'Diego Ramírez',
+        seniority: Seniority.SENIOR,
+        rol: 'iOS Developer',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: ana.id,
+        mentor_id: diego.id,
+      },
+      
+      // Data Team
+      {
+        nombre_y_apellido: 'Ana Carolina Ríos',
+        seniority: Seniority.SENIOR,
+        rol: 'Data Engineer',
+        estado: EstadoTalento.ACTIVO,
+        lider_id: carlos.id,
+        mentor_id: diego.id,
       }
     ]
   });
