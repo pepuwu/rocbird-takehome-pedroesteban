@@ -58,8 +58,8 @@ async function GET(request: NextRequest, { params }: { params: { id: string } })
 // PUT /api/interacciones/[id] - ACTUALIZAR INTERACCIÓN
 // ========================================
 
-async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
+async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const body = await request.json();
   const validatedData = InteraccionUpdateSchema.parse(body);
   

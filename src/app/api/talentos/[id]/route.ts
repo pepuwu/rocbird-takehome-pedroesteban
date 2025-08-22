@@ -12,8 +12,8 @@ import {
 // GET /api/talentos/[id] - OBTENER TALENTO POR ID
 // ========================================
 
-async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
+async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   
   const talento = await prisma.talento.findUnique({
     where: { id },
@@ -68,8 +68,8 @@ async function GET(request: NextRequest, { params }: { params: { id: string } })
 // PUT /api/talentos/[id] - ACTUALIZAR TALENTO
 // ========================================
 
-async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
+async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const body = await request.json();
   const validatedData = TalentoUpdateSchema.parse(body);
   
@@ -153,8 +153,8 @@ async function PUT(request: NextRequest, { params }: { params: { id: string } })
 // DELETE /api/talentos/[id] - ELIMINAR TALENTO
 // ========================================
 
-async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
+async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   
   // Verificar que el talento existe
   const talentoExistente = await prisma.talento.findUnique({
