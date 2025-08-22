@@ -50,7 +50,7 @@ export function handleApiError(error: unknown): NextResponse {
       "VALIDATION_ERROR",
       "Datos de entrada inválidos",
       400,
-      error.errors
+      error.issues
     );
   }
 

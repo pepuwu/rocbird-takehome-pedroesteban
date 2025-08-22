@@ -48,9 +48,7 @@ export const TalentoCreateSchema = z.object({
     .min(2, "El nombre debe tener al menos 2 caracteres")
     .max(100, "El nombre no puede exceder 100 caracteres"),
   
-  seniority: z.nativeEnum(Seniority, {
-    errorMap: () => ({ message: "Seniority debe ser uno de: JUNIOR, SEMI_SENIOR, SENIOR, LEAD, ARCHITECT" })
-  }),
+  seniority: z.nativeEnum(Seniority),
   
   rol: z.string()
     .min(2, "El rol debe tener al menos 2 caracteres")
@@ -102,9 +100,7 @@ export const ReferenteTecnicoUpdateSchema = ReferenteTecnicoCreateSchema.partial
 export const InteraccionCreateSchema = z.object({
   talento_id: z.string().cuid("ID de talento inválido"),
   
-  tipo_de_interaccion: z.nativeEnum(TipoInteraccion, {
-    errorMap: () => ({ message: "Tipo de interacción debe ser uno de: REUNION_1_1, CODE_REVIEW, MENTORIA, EVALUACION, FEEDBACK, CAPACITACION, OTRO" })
-  }),
+  tipo_de_interaccion: z.nativeEnum(TipoInteraccion),
   
   detalle: z.string()
     .min(5, "El detalle debe tener al menos 5 caracteres")
