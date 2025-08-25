@@ -44,8 +44,7 @@ COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 # Copiar package.json para scripts
 COPY --from=builder /app/package.json ./package.json
 
-# Crear usuario nextjs
-RUN adduser -D -s /bin/sh -u 1001 nextjs
+
 
 EXPOSE 3000
 
