@@ -84,6 +84,43 @@ npm run dev
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
 
+**⚠️ Nota importante:** Asegúrate de que PostgreSQL esté corriendo y que la base de datos `rocbird_takehome` exista antes de ejecutar los comandos de Prisma.
+
+### 🪟 **Para Usuarios de Windows**
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/pepuwu/rocbird-takehome-pedroesteban.git
+cd rocbird-takehome-pedroesteban
+
+# 2. Cambiar a la rama main
+git checkout main
+
+# 3. Instalar dependencias
+npm install
+
+# 4. Instalar PostgreSQL desde https://www.postgresql.org/download/windows/
+# O usar Docker: docker run --name postgres-rocbird -e POSTGRES_PASSWORD=password -e POSTGRES_DB=rocbird_takehome -p 5432:5432 -d postgres:15
+
+# 5. Crear archivo .env (en PowerShell)
+echo 'DATABASE_URL="postgresql://localhost:5432/rocbird_takehome"' > .env
+
+# 6. Configurar base de datos
+npx prisma generate
+npx prisma db push
+npm run db:seed
+
+# 7. Ejecutar en desarrollo
+npm run dev
+
+# ✅ ¡Listo! La aplicación estará en http://localhost:3000
+```
+
+**🔧 Solución de problemas comunes en Windows:**
+- Si `tsx` no está disponible: usar `npx tsx prisma/seed.ts`
+- Si hay problemas de TTY: usar comandos sin `-it` en Docker
+- Si PostgreSQL no se conecta: verificar que el servicio esté corriendo
+
 ## 📊 Scripts Disponibles
 
 ### 🐳 **Scripts Docker**
@@ -258,4 +295,3 @@ Proyecto interno de Rocbird para evaluación de candidatos.
 
 ---
 
-**¿Problemas?** Revisa la documentación o abre un issue en el repositorio.
