@@ -52,4 +52,4 @@ ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
 # Comando de inicio que configura todo automáticamente (como root)
-CMD ["sh", "-c", "npx prisma generate && npx prisma db push && npx prisma db seed && chown -R nextjs:nextjs /app/node_modules/.prisma && su nextjs -c 'node server.js'"]
+CMD ["sh", "-c", "npx prisma generate && npx prisma db push && npx prisma db seed && node server.js"]
