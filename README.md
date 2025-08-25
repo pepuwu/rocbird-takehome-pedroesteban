@@ -32,6 +32,20 @@ Sistema fullstack desarrollado con **Next.js 15**, **TypeScript**, **Prisma ORM*
 - **PostgreSQL** 15 o superior
 - **Docker** (opcional, para containerización)
 
+### ⚙️ **Configuración del Entorno (IMPORTANTE)**
+
+**Antes de continuar, crea un archivo `.env` en la raíz del proyecto:**
+
+```bash
+# Para Docker (recomendado)
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/rocbird_takehome"
+
+# Para PostgreSQL local (si ya tienes configurado)
+DATABASE_URL="postgresql://tu_usuario@localhost:5432/rocbird_takehome"
+```
+
+**⚠️ CRUCIAL:** Las credenciales en tu `.env` deben coincidir con las configuradas en `docker-compose.yml` si usas Docker.
+
 ### 🐳 **Opción 1: Docker (Recomendado)**
 
 ```bash
@@ -76,7 +90,7 @@ brew services start postgresql@15
 createdb rocbird_takehome
 
 # 5. Crear archivo .env
-echo 'DATABASE_URL="postgresql://localhost:5432/rocbird_takehome"' > .env
+echo 'DATABASE_URL="postgresql://postgres:postgres@localhost:5432/rocbird_takehome"' > .env
 
 # 6. Configurar base de datos
 npx prisma generate
@@ -90,6 +104,23 @@ npm run dev
 ```
 
 **⚠️ Nota importante:** Asegúrate de que PostgreSQL esté corriendo y que la base de datos `rocbird_takehome` exista antes de ejecutar los comandos de Prisma.
+
+### 🔍 **Verificación de Configuración**
+
+**Para verificar que todo esté configurado correctamente:**
+
+```bash
+# 1. Verificar que el archivo .env existe
+ls -la | grep .env
+
+# 2. Verificar el contenido del .env
+cat .env
+
+# 3. Probar conexión a la base de datos
+npx prisma db pull
+
+# 4. Si hay errores de autenticación, verificar credenciales
+```
 
 ### 🪟 **Para Usuarios de Windows**
 
@@ -108,7 +139,7 @@ npm install
 # O usar Docker: docker run --name postgres-rocbird -e POSTGRES_PASSWORD=password -e POSTGRES_DB=rocbird_takehome -p 5432:5432 -d postgres:15
 
 # 5. Crear archivo .env (en PowerShell)
-echo 'DATABASE_URL="postgresql://localhost:5432/rocbird_takehome"' > .env
+echo 'DATABASE_URL="postgresql://postgres:postgres@localhost:5432/rocbird_takehome"' > .env
 
 # 6. Configurar base de datos
 npx prisma generate
@@ -125,6 +156,15 @@ npm run dev
 - Si `tsx` no está disponible: usar `npx tsx prisma/seed.ts`
 - Si hay problemas de TTY: usar comandos sin `-it` en Docker
 - Si PostgreSQL no se conecta: verificar que el servicio esté corriendo
+
+**🚨 Errores de Autenticación Comunes:**
+
+Si ves `Error: P1000: Authentication failed against database server`:
+
+1. **Verificar archivo `.env`**: Asegúrate de que existe y tiene las credenciales correctas
+2. **Credenciales Docker**: Usa `postgres:postgres` si usas Docker
+3. **Credenciales locales**: Usa tu usuario de PostgreSQL local
+4. **Reiniciar Docker**: `docker-compose down -v && docker-compose up -d`
 
 ## 📊 Scripts Disponibles
 
