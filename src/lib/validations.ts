@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Seniority, EstadoTalento, TipoInteraccion, EstadoInteraccion } from "../generated/prisma";
+import { Seniority, EstadoTalento, TipoInteraccion, EstadoInteraccion } from "@prisma/client";
 
 // ========================================
 // UTILIDADES PARA FILTROS Y PAGINACIÓN
