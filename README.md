@@ -1,130 +1,90 @@
-# Rocbird takehome Fullstack/Heavy backend dev
+# 🚀 Sistema de Gestión de Talentos - Rocbird Takehome
 
-Este proyecto base es un starter kit enfocadao a una herramienta interna para control de staffing de talentos para que puedas demostrar tus habilidades técnicas como fullstack orientado fuertemente a backend con tecnologías modernas.  
-Aquí tendrás que implementar y extender funcionalidades usando **Next.js v15**, **TypeScript**, **Prisma ORM** y una UI base con **shadcn** y **TailwindCSS**.
+**Herramienta interna para control de staffing y seguimiento de talentos en Rocbird**
 
-El objetivo principal es evaluar la capacidad del postulante para:  
-- Diseñar **APIs limpias** y seguras.  
-- Manejar base de datos con Prisma ORM aplicando buenas prácticas.  
-- Crear interfaces eficientes, escalables, fuertemente tipadas y correctamente estructuradas.  
+Sistema fullstack desarrollado con **Next.js 15**, **TypeScript**, **Prisma ORM**, **PostgreSQL** y **shadcn/ui** para la gestión completa de talentos, referentes técnicos e interacciones.
 
-El tiempo para resolver este takehome será de **7 días** desde el día en el que se comparta el repo para ser clonado.
+## ✨ Características Implementadas
 
----
+- ✅ **CRUD completo** de talentos con filtros y paginación
+- ✅ **Gestión de referentes técnicos** (líderes y mentores)
+- ✅ **Sistema de interacciones** con seguimiento de estados
+- ✅ **Dashboard dinámico** con estadísticas en tiempo real
+- ✅ **Validaciones robustas** con Zod en frontend y backend
+- ✅ **UI moderna** con shadcn/ui y TailwindCSS
+- ✅ **Dockerizado** para fácil deployment
+- ✅ **Base de datos** con Prisma y PostgreSQL
 
-## Puntos a resolver
+## 🛠️ Tecnologías
 
-1. **CRUD completo de talentos**  
-   - Implementar las operaciones Create, Read, Update y Delete para el modelo `Talento` usando Prisma y exponerlos a través de rutas API de Next.js (App Router).  
-   - La UI deberá permitir listar, crear, editar y eliminar talentos.  
-   - Usar rutas dinámicas (`app/talentos/[id]`) y soportar query params para filtrado y paginación (`/talentos?page=2&sort=asc`).
+- **Frontend:** Next.js 15 (App Router), React 19, TypeScript
+- **Backend:** Next.js API Routes, Prisma ORM
+- **Base de Datos:** PostgreSQL
+- **UI:** shadcn/ui, TailwindCSS
+- **Validación:** Zod
+- **Containerización:** Docker & Docker Compose
 
-2. **Validación y manejo de errores**  
-   - Validar tanto en backend como en frontend asegurando tipado estricto entre ambos.  
-   - Validar campos requeridos, formatos y devolver códigos HTTP correctos.  
-   - Mostrar mensajes claros y amigables para el usuario en la UI (toast, alert).
+## 🚀 Instalación Rápida
 
-3. **Consumo eficiente de la base de datos**  
-   - Usar `select` / `include` para traer solo datos necesarios.  
-   - Evitar N+1 queries con relaciones bien definidas.  
-   - Manejar transacciones con `prisma.$transaction` para operaciones múltiples.
+### 📋 Prerrequisitos
 
-4. **Uso de componentes UI reutilizables**  
-   - Usar componentes de `shadcn/ui` para formularios, tablas, modales y toasts.  
-   - Seguir un patrón consistente de estilos y estructura.  
-   - Construir componentes genéricos reutilizables que puedan adaptarse a distintos casos.
-
-5. **Configuración y documentación clara**  
-   - Proyecto listo para clonar y correr con instrucciones claras.  
-   - Scripts útiles (`db:push`, `db:seed`, `lint`, `format`).  
-   - `.env.example` documentado.
-
-6. **Modelado y seed de base de datos**  
-   - Levantar una base de datos **PostgreSQL local**.  
-   - Conectarla al backend mediante Prisma.  
-   - Crear un **seed inicial** que incluya las siguientes tablas y relaciones:
-     - **talento**: Representa a una persona parte del staff.(nombre_y_apellido, seniority, rol, estado ("activo" o "inactivo"), )
-     - **referente_tecnico**: Puede actuar como **líder** y/o **mentor** de uno o varios talentos.  
-       - Un talento puede tener **líder** y/o **mentor** (pueden ser la misma persona o distintas).  
-       - Un referente técnico puede tener múltiples talentos a cargo (determinar correctamente relaciones uno a muchos, muchos a muchos, etc).  
-     - **interaccion**: Registro de interacciones de un talento, generar los tipos correctos para cada columna del schema (tipo_de_interaccion, fecha, detalle, estado, fecha_de_modificacion) y vincularlas correctamente al talento.  
-       - Un talento puede tener múltiples interacciones.
-       - El estado de la intearccion puede actualizarse desde el front ("Iniciada", "En Progreso", "Finalizada")
-       - Documentar el esquema y sus relaciones en el README o en `prisma/schema.prisma`.  
-
----
-
-## Puntos extra (opcionales):
-
-- Utilizar Docker.  
-- Testing unitario de funcionalidades críticas.  
-
----
-
-## 🚀 Instalación y Setup
+- **Node.js** 18 o superior
+- **PostgreSQL** 15 o superior
+- **Docker** (opcional, para containerización)
 
 ### 🐳 **Opción 1: Docker (Recomendado)**
-```bash
-# Clonar el repositorio
-git clone <tu-repo-url>
-cd rocbird-takehome
-git checkout develop
 
-# Levantar todo el stack con Docker
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/pepuwu/rocbird-takehome-pedroesteban.git
+cd rocbird-takehome-pedroesteban
+
+# 2. Cambiar a la rama main
+git checkout main
+
+# 3. Levantar todo el stack
 docker-compose up -d
 
-# La aplicación estará disponible en http://localhost:3000
-# Prisma Studio en http://localhost:5555
+# 4. Ejecutar migraciones y seed
+docker exec rocbird-app npx prisma db push
+docker exec rocbird-app npx prisma db seed
+
+# ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
 
 ### 💻 **Opción 2: Instalación Local**
-#### 1. Clonar e instalar dependencias
-```bash
-git clone <tu-repo-url>
-cd rocbird-takehome
-git checkout develop
-npm install
-```
 
-### 2. Configurar PostgreSQL
 ```bash
-# macOS con Homebrew
+# 1. Clonar el repositorio
+git clone https://github.com/pepuwu/rocbird-takehome-pedroesteban.git
+cd rocbird-takehome-pedroesteban
+
+# 2. Cambiar a la rama main
+git checkout main
+
+# 3. Instalar dependencias
+npm install
+
+# 4. Configurar PostgreSQL
 brew install postgresql@15
 brew services start postgresql@15
 createdb rocbird_takehome
 
-# O con Docker
-docker run --name postgres-rocbird \
-  -e POSTGRES_PASSWORD=password \
-  -e POSTGRES_DB=rocbird_takehome \
-  -p 5432:5432 -d postgres:15
-```
+# 5. Crear archivo .env
+echo 'DATABASE_URL="postgresql://localhost:5432/rocbird_takehome"' > .env
 
-### 3. Configurar variables de entorno
-Crear archivo `.env` en la raíz del proyecto:
-```bash
-# Para usuario local sin contraseña
-DATABASE_URL="postgresql://tu_usuario@localhost:5432/rocbird_takehome"
-
-# Para Docker
-DATABASE_URL="postgresql://postgres:password@localhost:5432/rocbird_takehome"
-```
-
-### 4. Configurar base de datos
-```bash
+# 6. Configurar base de datos
 npx prisma generate
 npx prisma db push
 npm run db:seed
-```
 
-### 5. Ejecutar el proyecto
-```bash
+# 7. Ejecutar en desarrollo
 npm run dev
+
+# ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
 
-Abre [http://localhost:3000] en tu navegador para ver el resultado.
-
-## 📊 Scripts Útiles
+## 📊 Scripts Disponibles
 
 ### 🐳 **Scripts Docker**
 ```bash
@@ -138,91 +98,164 @@ npm run docker:clean    # Limpiar todo (volúmenes incluidos)
 ### 💻 **Scripts de Desarrollo**
 ```bash
 npm run dev          # Servidor de desarrollo
+npm run build        # Build de producción
+npm run start        # Servidor de producción
 npm run db:push      # Sincronizar schema con DB
-npm run db:seed      # Poblar con datos de ejemplo  
+npm run db:seed      # Poblar con datos de ejemplo
 npm run db:studio    # Abrir Prisma Studio
 npm run db:reset     # Reset completo + seed
 ```
 
-## 🗄️ Documentación del Schema
+## 🗄️ Estructura de la Base de Datos
 
-### Entidades y Relaciones
+### **Entidades Principales**
 
 #### **Talento**
-```prisma
-model Talento {
-  id                String   @id @default(cuid())
-  nombre_y_apellido String
-  seniority         Seniority // JUNIOR, SEMI_SENIOR, SENIOR, LEAD, ARCHITECT
-  rol               String
-  estado            EstadoTalento @default(ACTIVO) // ACTIVO, INACTIVO
-  fecha_creacion    DateTime @default(now())
-  fecha_actualizacion DateTime @updatedAt
-  
-  // Relaciones opcionales
-  lider_id          String?
-  mentor_id         String?
-  lider             ReferenteTecnico? @relation("LiderTalento")
-  mentor            ReferenteTecnico? @relation("MentorTalento")
-  interacciones     Interaccion[]
-}
-```
+- Información personal y profesional
+- Seniority (Junior, Semi-Senior, Senior, Lead, Architect)
+- Estado (Activo/Inactivo)
+- Relaciones con líder y mentor
 
-#### **ReferenteTecnico**
-```prisma
-model ReferenteTecnico {
-  id                String   @id @default(cuid())
-  nombre_y_apellido String
-  email             String   @unique
-  especialidad      String?
-  fecha_creacion    DateTime @default(now())
-  fecha_actualizacion DateTime @updatedAt
-  
-  // Relaciones - Un referente puede liderar/mentorar múltiples talentos
-  talentos_liderados    Talento[] @relation("LiderTalento")
-  talentos_mentoreados  Talento[] @relation("MentorTalento")
-}
-```
+#### **Referente Técnico**
+- Líderes y mentores del equipo
+- Especialidades técnicas
+- Pueden liderar y/o mentorar múltiples talentos
 
-#### **Interaccion**
-```prisma
-model Interaccion {
-  id                    String   @id @default(cuid())
-  tipo_de_interaccion   TipoInteraccion // REUNION_1_1, CODE_REVIEW, MENTORIA, etc.
-  fecha                 DateTime @default(now())
-  detalle               String
-  estado                EstadoInteraccion @default(INICIADA) // INICIADA, EN_PROGRESO, FINALIZADA
-  fecha_de_modificacion DateTime @updatedAt
-  
-  // Relación - Una interacción pertenece a un talento
-  talento_id            String
-  talento               Talento @relation(fields: [talento_id], references: [id], onDelete: Cascade)
-}
-```
+#### **Interacción**
+- Seguimiento de reuniones, mentorías, evaluaciones
+- Estados: Iniciada, En Progreso, Finalizada, Cancelada
+- Tipos: Reunión 1:1, Code Review, Mentoría, Evaluación, etc.
 
-### Datos de Ejemplo
-El seed crea:
-- **4 referentes técnicos** (Ana García, Carlos Rodríguez, María López, Diego Fernández)
-- **6 talentos** con diferentes roles y seniorities
-- **19 interacciones** de diferentes tipos
+### **Datos de Ejemplo**
+El seed crea automáticamente:
+- **5 referentes técnicos** con especialidades realistas
+- **20 talentos** organizados por equipos (Frontend, Backend, DevOps, Mobile, Full Stack)
+- **Interacciones variadas** con detalles contextuales
 
-## 🎯 APIs Implementadas
+## 🔌 APIs Disponibles
 
-### Talentos
-- `GET /api/talentos` - Listar con filtros y paginación
-- `GET /api/talentos/[id]` - Obtener por ID
-- `POST /api/talentos` - Crear nuevo
-- `PUT /api/talentos/[id]` - Actualizar
-- `DELETE /api/talentos/[id]` - Eliminar
+### **Talentos**
+- `GET /api/talentos` - Listar con filtros, paginación y sorting
+- `GET /api/talentos/[id]` - Obtener talento específico
+- `POST /api/talentos` - Crear nuevo talento
+- `PUT /api/talentos/[id]` - Actualizar talento
+- `DELETE /api/talentos/[id]` - Eliminar talento
 
-### Referentes Técnicos
-- `GET /api/referentes-tecnicos` - Listar todos
-- `POST /api/referentes-tecnicos` - Crear nuevo
+### **Referentes Técnicos**
+- `GET /api/referentes-tecnicos` - Listar todos los referentes
+- `POST /api/referentes-tecnicos` - Crear nuevo referente
 
-### Interacciones
-- `GET /api/interacciones` - Listar todas (filtro por talento_id)
-- `POST /api/interacciones` - Crear nueva
+### **Interacciones**
+- `GET /api/interacciones` - Listar con filtros y paginación
+- `POST /api/interacciones` - Crear nueva interacción
 - `PUT /api/interacciones/[id]` - Actualizar estado
 
-### Sistema
-- `GET /api/health` - Estado de la API y DB
+### **Sistema**
+- `GET /api/health` - Estado de la API y conexión a base de datos
+
+## 🎯 Funcionalidades del Frontend
+
+### **Dashboard Principal**
+- Estadísticas en tiempo real
+- Contadores de talentos, referentes e interacciones
+- Navegación rápida a todas las secciones
+
+### **Gestión de Talentos**
+- Lista con filtros por estado y seniority
+- Búsqueda en tiempo real con debounce
+- Paginación y sorting
+- CRUD completo (Crear, Ver, Editar, Eliminar)
+
+### **Referentes Técnicos**
+- Lista de líderes y mentores
+- Crear nuevos referentes
+- Ver talentos asociados
+
+### **Interacciones**
+- Lista con filtros por tipo y estado
+- Crear nuevas interacciones
+- Actualizar estados en tiempo real
+- Seguimiento completo del ciclo de vida
+
+## 🐳 Docker
+
+### **Servicios Incluidos**
+- **PostgreSQL 15** - Base de datos principal
+- **Next.js App** - Aplicación principal
+- **Prisma Studio** - Gestor de base de datos (opcional)
+
+### **Puertos**
+- **3000** - Aplicación principal
+- **5433** - PostgreSQL (mapeado desde 5432 interno)
+- **5555** - Prisma Studio (opcional)
+
+## 🔧 Configuración Avanzada
+
+### **Variables de Entorno**
+```bash
+# Base de datos
+DATABASE_URL="postgresql://usuario:password@localhost:5432/rocbird_takehome"
+
+# Aplicación
+NODE_ENV="development"
+PORT="3000"
+```
+
+### **Personalización de Base de Datos**
+```bash
+# Cambiar puerto PostgreSQL
+# En docker-compose.yml, línea 18: "5433:5432"
+
+# Cambiar credenciales
+# En docker-compose.yml, líneas 7-9
+```
+
+## 📝 Notas de Desarrollo
+
+- **Rama principal:** `main`
+- **Base de datos:** PostgreSQL con Prisma ORM
+- **UI Components:** shadcn/ui con TailwindCSS
+- **Validación:** Zod schemas en frontend y backend
+- **Estado:** React hooks con fetch API nativo
+- **Routing:** Next.js 15 App Router
+
+## 🚀 Puntos a Mejorar
+
+### **Funcionalidades Pendientes**
+- [ ] **Unit Tests** - Implementar testing unitario con Jest/React Testing Library
+- [ ] **E2E Tests** - Agregar tests end-to-end con Playwright o Cypress
+- [ ] **Error Boundaries** - Implementar manejo de errores en React
+- [ ] **Loading States** - Mejorar estados de carga y skeleton screens
+- [ ] **Toast Notifications** - Sistema de notificaciones para feedback del usuario
+
+### **Mejoras Técnicas**
+- [ ] **Caching** - Implementar React Query o SWR para cache de datos
+- [ ] **Optimización** - Lazy loading de componentes y code splitting
+- [ ] **SEO** - Meta tags y optimización para motores de búsqueda
+- [ ] **PWA** - Convertir en Progressive Web App
+- [ ] **Internacionalización** - Soporte multi-idioma
+
+### **DevOps y Deployment**
+- [ ] **CI/CD** - Pipeline de GitHub Actions o GitLab CI
+- [ ] **Testing Automatizado** - Tests automáticos en cada PR
+- [ ] **Monitoreo** - Logs y métricas de performance
+- [ ] **Backup** - Estrategia de backup de base de datos
+- [ ] **Escalabilidad** - Preparar para múltiples instancias
+
+## 🤝 Contribución
+
+Este es un proyecto de take-home para Rocbird. Para contribuir:
+
+1. Fork del repositorio
+2. Crear rama feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit cambios (`git commit -m 'feat: agregar nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Crear Pull Request
+
+## 📄 Licencia
+
+Proyecto interno de Rocbird para evaluación de candidatos.
+
+---
+
+**¿Problemas?** Revisa la documentación o abre un issue en el repositorio.
