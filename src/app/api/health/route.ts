@@ -31,8 +31,4 @@ async function GET(request: NextRequest) {
 // EXPORTAR HANDLER
 // ========================================
 
-const handler = createMethodHandler({
-  GET,
-});
-
-export { handler as GET };
+export { GET };

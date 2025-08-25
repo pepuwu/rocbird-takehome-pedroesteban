@@ -15,12 +15,12 @@ export function createErrorResponse(
   error: string,
   message: string,
   status: number = 400,
-  details?: any
+  details?: unknown
 ): NextResponse {
   const errorResponse: ApiError = {
     error,
     message,
-    ...(details && { details }),
+    ...(details && typeof details === 'object' ? { details } : {}),
   };
   
   return NextResponse.json(errorResponse, { status });
@@ -173,8 +173,8 @@ export function buildSortOrder(sortBy: string = "fecha_creacion", sort: string =
 // MIDDLEWARE PARA VALIDACIÓN DE MÉTODOS HTTP
 // ========================================
 
-export function createMethodHandler(handlers: Record<string, Function>) {
-  return async (request: NextRequest, context: any) => {
+export function createMethodHandler(handlers: Record<string, (...args: unknown[]) => unknown>) {
+  return async (request: NextRequest, context: unknown) => {
     const method = request.method;
     const handler = handlers[method];
     
