@@ -45,8 +45,8 @@ COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/package.json ./package.json
 
 # Crear usuario nextjs
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup -g 1001 nodejs
+RUN adduser -D -s /bin/sh -u 1001 -G nodejs nextjs
 
 EXPOSE 3000
 
