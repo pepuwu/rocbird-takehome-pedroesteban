@@ -36,23 +36,38 @@ Sistema fullstack desarrollado con **Next.js 15**, **TypeScript**, **Prisma ORM*
 
 ### 🐳 **Opción 1: Docker (Recomendado)**
 
-**🚀 Instalación paso a paso para Docker:**
+**🚀 Instalación súper simple - Solo 2 comandos:**
 
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/pepuwu/rocbird-takehome-pedroesteban.git
 cd rocbird-takehome-pedroesteban
 
-# 2. Cambiar a la rama main
-git checkout main
-
-# 3. Levantar todo el stack
+# 2. Levantar todo el stack
 docker-compose up -d
-
-
 
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
+
+**🚀 Todo se configura automáticamente:**
+- ✅ **PostgreSQL** se inicializa automáticamente
+- ✅ **Prisma client** se genera automáticamente
+- ✅ **Migraciones** se aplican automáticamente
+- ✅ **Datos de ejemplo** se cargan automáticamente
+- ✅ **Aplicación** se inicia automáticamente
+
+**📊 ¿Qué se crea automáticamente?**
+- **5 referentes técnicos** con especialidades realistas
+- **13 talentos** organizados por equipos
+- **41 interacciones** con detalles contextuales
+
+**🔍 Verificación rápida:**
+1. **Abre http://localhost:3000** en tu navegador
+2. **Verifica que los contadores muestren:**
+   - Total Talentos: **13**
+   - Referentes Técnicos: **5** 
+   - Interacciones: **41**
+3. **¡Si ves estos números, todo funciona perfectamente!**
 
 **🔑 Credenciales por defecto:**
 - **Usuario:** `postgres`
@@ -139,23 +154,30 @@ npx prisma db pull
 
 ### 🪟 **Para Usuarios de Windows**
 
-**🚀 Instalación con Docker (RECOMENDADO para Windows):**
+**🚀 Instalación súper simple - Solo 2 comandos:**
 
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/pepuwu/rocbird-takehome-pedroesteban.git
 cd rocbird-takehome-pedroesteban
 
-# 2. Cambiar a la rama main
-git checkout main
-
-# 3. Levantar con Docker
+# 2. Levantar con Docker
 docker-compose up -d
-
-
 
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
+
+**🚀 Todo se configura automáticamente:**
+- ✅ **PostgreSQL** se inicializa automáticamente
+- ✅ **Prisma client** se genera automáticamente
+- ✅ **Migraciones** se aplican automáticamente
+- ✅ **Datos de ejemplo** se cargan automáticamente
+- ✅ **Aplicación** se inicia automáticamente
+
+**⚠️ IMPORTANTE para Windows:**
+- **Siempre** usa Docker (evita problemas de instalación de PostgreSQL)
+- **Si hay problemas de TTY**: usa comandos sin `-it`
+- **Si algo falla**: `docker-compose down -v && docker-compose up -d --build`
 
 **⚠️ IMPORTANTE para Windows:**
 - **Siempre** usa Docker (evita problemas de instalación de PostgreSQL)
@@ -207,8 +229,8 @@ npm run db:reset     # Reset completo + seed
 ### **Datos de Ejemplo**
 El seed crea automáticamente:
 - **5 referentes técnicos** con especialidades realistas
-- **20 talentos** organizados por equipos (Frontend, Backend, DevOps, Mobile, Full Stack)
-- **Interacciones variadas** con detalles contextuales
+- **13 talentos** organizados por equipos (Frontend, Backend, DevOps, Mobile, Full Stack)
+- **41 interacciones** con detalles contextuales
 
 ## 🔌 APIs Disponibles
 
