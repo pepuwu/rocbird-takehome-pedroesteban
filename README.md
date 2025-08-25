@@ -84,6 +84,38 @@ npm run dev
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
 
+## 🚀 **Scripts de Inicio Automático**
+
+### **Para macOS/Linux:**
+```bash
+# Hacer ejecutable y ejecutar
+chmod +x start.sh
+./start.sh
+```
+
+### **Para Windows:**
+```bash
+# Ejecutar el script batch
+start.bat
+```
+
+**✨ Ventajas de los scripts automáticos:**
+- ✅ **Verificación automática** de prerrequisitos
+- ✅ **Configuración automática** de base de datos
+- ✅ **Seed automático** de datos
+- ✅ **Manejo de errores** con mensajes claros
+- ✅ **Colores y formato** para mejor experiencia
+
+**Los scripts verifican:**
+- Node.js 18+ instalado
+- npm disponible
+- PostgreSQL corriendo
+- Base de datos existente
+- Archivo .env configurado
+- Cliente Prisma generado
+- Schema sincronizado
+- Datos seedeados
+
 **⚠️ Nota importante:** Asegúrate de que PostgreSQL esté corriendo y que la base de datos `rocbird_takehome` exista antes de ejecutar los comandos de Prisma.
 
 ### 🪟 **Para Usuarios de Windows**
