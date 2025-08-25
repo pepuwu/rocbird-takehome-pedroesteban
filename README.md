@@ -52,6 +52,11 @@ docker exec rocbird-app npx prisma db seed
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
 
+**🔑 Credenciales por defecto:**
+- **Usuario:** `postgres`
+- **Contraseña:** `postgres`
+- **Base de datos:** `rocbird_takehome`
+
 ### 💻 **Opción 2: Instalación Local**
 
 ```bash
