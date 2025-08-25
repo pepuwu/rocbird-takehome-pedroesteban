@@ -32,21 +32,11 @@ Sistema fullstack desarrollado con **Next.js 15**, **TypeScript**, **Prisma ORM*
 - **PostgreSQL** 15 o superior
 - **Docker** (opcional, para containerización)
 
-### ⚙️ **Configuración del Entorno (IMPORTANTE)**
 
-**Antes de continuar, crea un archivo `.env` en la raíz del proyecto:**
-
-```bash
-# Para Docker (recomendado)
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/rocbird_takehome"
-
-# Para PostgreSQL local (si ya tienes configurado)
-DATABASE_URL="postgresql://tu_usuario@localhost:5432/rocbird_takehome"
-```
-
-**⚠️ CRUCIAL:** Las credenciales en tu `.env` deben coincidir con las configuradas en `docker-compose.yml` si usas Docker.
 
 ### 🐳 **Opción 1: Docker (Recomendado)**
+
+**🚀 Instalación paso a paso para Docker:**
 
 ```bash
 # 1. Clonar el repositorio
@@ -59,8 +49,15 @@ git checkout main
 # 3. Levantar todo el stack
 docker-compose up -d
 
-# 4. Ejecutar migraciones y seed
+# 5. Esperar a que PostgreSQL esté listo (ver "Container rocbird-postgres Healthy")
+
+# 6. Generar cliente Prisma
+docker exec rocbird-app npx prisma generate
+
+# 7. Ejecutar migraciones
 docker exec rocbird-app npx prisma db push
+
+# 8. Poblar con datos de ejemplo
 docker exec rocbird-app npx prisma db seed
 
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
@@ -70,6 +67,37 @@ docker exec rocbird-app npx prisma db seed
 - **Usuario:** `postgres`
 - **Contraseña:** `postgres`
 - **Base de datos:** `rocbird_takehome`
+- **Puerto:** `5432`
+
+**⚠️ IMPORTANTE:**
+- **Espera** a que PostgreSQL esté "Healthy" antes de ejecutar comandos
+- **Si algo falla**, usa `docker-compose down -v && docker-compose up -d --build`
+
+
+
+### 🚨 **Solución de problemas comunes en Docker:**
+
+**Error: "Authentication failed"**
+```bash
+# Limpiar volúmenes y recrear
+docker-compose down -v
+docker-compose up -d
+```
+
+**Error: "Cannot find module"**
+```bash
+# Reconstruir contenedor
+docker-compose down
+docker-compose up -d --build
+```
+
+**Error: "Prisma Client did not initialize"**
+```bash
+# Generar cliente Prisma
+docker exec rocbird-app npx prisma generate
+```
+
+
 
 ### 💻 **Opción 2: Instalación Local**
 
@@ -89,10 +117,7 @@ brew install postgresql@15
 brew services start postgresql@15
 createdb rocbird_takehome
 
-# 5. Crear archivo .env
-echo 'DATABASE_URL="postgresql://postgres:postgres@localhost:5432/rocbird_takehome"' > .env
-
-# 6. Configurar base de datos
+# 5. Configurar base de datos
 npx prisma generate
 npx prisma db push
 npm run db:seed
@@ -124,6 +149,8 @@ npx prisma db pull
 
 ### 🪟 **Para Usuarios de Windows**
 
+**🚀 Instalación con Docker (RECOMENDADO para Windows):**
+
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/pepuwu/rocbird-takehome-pedroesteban.git
@@ -132,39 +159,27 @@ cd rocbird-takehome-pedroesteban
 # 2. Cambiar a la rama main
 git checkout main
 
-# 3. Instalar dependencias
-npm install
+# 3. Levantar con Docker
+docker-compose up -d
 
-# 4. Instalar PostgreSQL desde https://www.postgresql.org/download/windows/
-# O usar Docker: docker run --name postgres-rocbird -e POSTGRES_PASSWORD=password -e POSTGRES_DB=rocbird_takehome -p 5432:5432 -d postgres:15
+# 5. Esperar a que PostgreSQL esté "Healthy"
 
-# 5. Crear archivo .env (en PowerShell)
-echo 'DATABASE_URL="postgresql://postgres:postgres@localhost:5432/rocbird_takehome"' > .env
+# 6. Generar cliente Prisma
+docker exec rocbird-app npx prisma generate
 
-# 6. Configurar base de datos
-npx prisma generate
-npx prisma db push
-npm run db:seed
+# 7. Ejecutar migraciones
+docker exec rocbird-app npx prisma db push
 
-# 7. Ejecutar en desarrollo
-npm run dev
+# 8. Poblar con datos
+docker exec rocbird-app npx prisma db seed
 
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
 
-**🔧 Solución de problemas comunes en Windows:**
-- Si `tsx` no está disponible: usar `npx tsx prisma/seed.ts`
-- Si hay problemas de TTY: usar comandos sin `-it` en Docker
-- Si PostgreSQL no se conecta: verificar que el servicio esté corriendo
-
-**🚨 Errores de Autenticación Comunes:**
-
-Si ves `Error: P1000: Authentication failed against database server`:
-
-1. **Verificar archivo `.env`**: Asegúrate de que existe y tiene las credenciales correctas
-2. **Credenciales Docker**: Usa `postgres:postgres` si usas Docker
-3. **Credenciales locales**: Usa tu usuario de PostgreSQL local
-4. **Reiniciar Docker**: `docker-compose down -v && docker-compose up -d`
+**⚠️ IMPORTANTE para Windows:**
+- **Siempre** usa Docker (evita problemas de instalación de PostgreSQL)
+- **Si hay problemas de TTY**: usa comandos sin `-it`
+- **Si algo falla**: `docker-compose down -v && docker-compose up -d --build`
 
 ## 📊 Scripts Disponibles
 
