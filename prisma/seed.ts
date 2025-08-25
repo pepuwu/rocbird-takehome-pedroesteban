@@ -1,4 +1,4 @@
-import { PrismaClient, Seniority, EstadoTalento, TipoInteraccion, EstadoInteraccion } from '@prisma/client';
+import { PrismaClient, Seniority, EstadoTalento, TipoInteraccion, EstadoInteraccion } from '../src/generated/prisma';
 
 const prisma = new PrismaClient();
 

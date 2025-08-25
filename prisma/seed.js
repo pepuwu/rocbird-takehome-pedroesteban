@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
+const prisma_1 = require("../src/generated/prisma");
+const prisma = new prisma_1.PrismaClient();
 async function main() {
     console.log('🌱 Iniciando seed de la base de datos...');
     // Limpiar datos existentes
@@ -51,118 +51,118 @@ async function main() {
             // Equipo Frontend
             {
                 nombre_y_apellido: 'Diego Silva',
-                seniority: client_1.Seniority.JUNIOR,
+                seniority: prisma_1.Seniority.JUNIOR,
                 rol: 'Frontend Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: maria.id,
                 mentor_id: maria.id,
             },
             {
                 nombre_y_apellido: 'Valentina Herrera',
-                seniority: client_1.Seniority.SEMI_SENIOR,
+                seniority: prisma_1.Seniority.SEMI_SENIOR,
                 rol: 'Frontend Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: maria.id,
                 mentor_id: maria.id,
             },
             {
                 nombre_y_apellido: 'Roberto Jiménez',
-                seniority: client_1.Seniority.SENIOR,
+                seniority: prisma_1.Seniority.SENIOR,
                 rol: 'Frontend Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: maria.id,
                 mentor_id: luis.id,
             },
             // Equipo Backend
             {
                 nombre_y_apellido: 'Camila Torres',
-                seniority: client_1.Seniority.JUNIOR,
+                seniority: prisma_1.Seniority.JUNIOR,
                 rol: 'Backend Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: carlos.id,
                 mentor_id: carlos.id,
             },
             {
                 nombre_y_apellido: 'Andrés Morales',
-                seniority: client_1.Seniority.SEMI_SENIOR,
+                seniority: prisma_1.Seniority.SEMI_SENIOR,
                 rol: 'Backend Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: carlos.id,
                 mentor_id: carlos.id,
             },
             {
                 nombre_y_apellido: 'Natalia Castro',
-                seniority: client_1.Seniority.SENIOR,
+                seniority: prisma_1.Seniority.SENIOR,
                 rol: 'Backend Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: carlos.id,
                 mentor_id: luis.id,
             },
             {
                 nombre_y_apellido: 'Miguel Rojas',
-                seniority: client_1.Seniority.LEAD,
+                seniority: prisma_1.Seniority.LEAD,
                 rol: 'Backend Team Lead',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: luis.id,
                 mentor_id: luis.id,
             },
             // Equipo DevOps
             {
                 nombre_y_apellido: 'Gabriela Paredes',
-                seniority: client_1.Seniority.JUNIOR,
+                seniority: prisma_1.Seniority.JUNIOR,
                 rol: 'DevOps Engineer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: ana.id,
                 mentor_id: ana.id,
             },
             {
                 nombre_y_apellido: 'Felipe Vega',
-                seniority: client_1.Seniority.SEMI_SENIOR,
+                seniority: prisma_1.Seniority.SEMI_SENIOR,
                 rol: 'DevOps Engineer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: ana.id,
                 mentor_id: ana.id,
             },
             // Equipo Mobile
             {
                 nombre_y_apellido: 'Isabella Contreras',
-                seniority: client_1.Seniority.JUNIOR,
+                seniority: prisma_1.Seniority.JUNIOR,
                 rol: 'Mobile Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: sofia.id,
                 mentor_id: sofia.id,
             },
             {
                 nombre_y_apellido: 'Sebastián Fuentes',
-                seniority: client_1.Seniority.SEMI_SENIOR,
+                seniority: prisma_1.Seniority.SEMI_SENIOR,
                 rol: 'Mobile Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: sofia.id,
                 mentor_id: sofia.id,
             },
             // Equipo Full Stack
             {
                 nombre_y_apellido: 'Daniela Ruiz',
-                seniority: client_1.Seniority.SENIOR,
+                seniority: prisma_1.Seniority.SENIOR,
                 rol: 'Full Stack Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: luis.id,
                 mentor_id: luis.id,
             },
             {
                 nombre_y_apellido: 'Matías Espinoza',
-                seniority: client_1.Seniority.SEMI_SENIOR,
+                seniority: prisma_1.Seniority.SEMI_SENIOR,
                 rol: 'Full Stack Developer',
-                estado: client_1.EstadoTalento.ACTIVO,
+                estado: prisma_1.EstadoTalento.ACTIVO,
                 lider_id: luis.id,
                 mentor_id: luis.id,
             },
             // Talento inactivo (ejemplo)
             {
                 nombre_y_apellido: 'Alejandro Soto',
-                seniority: client_1.Seniority.JUNIOR,
+                seniority: prisma_1.Seniority.JUNIOR,
                 rol: 'Frontend Developer',
-                estado: client_1.EstadoTalento.INACTIVO,
+                estado: prisma_1.EstadoTalento.INACTIVO,
                 lider_id: maria.id,
                 mentor_id: null,
             }
@@ -170,7 +170,7 @@ async function main() {
     });
     // Obtener los talentos creados para crear interacciones
     const talentosCreados = await prisma.talento.findMany({
-        where: { estado: client_1.EstadoTalento.ACTIVO }
+        where: { estado: prisma_1.EstadoTalento.ACTIVO }
     });
     // Crear interacciones realistas
     const interaccionesData = [];
@@ -180,8 +180,8 @@ async function main() {
         for (let i = 0; i < numInteracciones; i++) {
             const fecha = new Date();
             fecha.setDate(fecha.getDate() - Math.floor(Math.random() * 30)); // Últimos 30 días
-            const tipos = Object.values(client_1.TipoInteraccion);
-            const estados = Object.values(client_1.EstadoInteraccion);
+            const tipos = Object.values(prisma_1.TipoInteraccion);
+            const estados = Object.values(prisma_1.EstadoInteraccion);
             interaccionesData.push({
                 tipo_de_interaccion: tipos[Math.floor(Math.random() * tipos.length)],
                 fecha: fecha,
