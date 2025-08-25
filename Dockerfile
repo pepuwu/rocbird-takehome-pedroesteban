@@ -37,9 +37,12 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 
-# Copiar Prisma client generado (con binaryTargets correctos)
+# Copiar Prisma client generado
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+
+# Copiar package.json para scripts
+COPY --from=builder /app/package.json ./package.json
 
 # Cambiar a usuario no-root
 USER nextjs
@@ -49,4 +52,8 @@ EXPOSE 3000
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
-CMD ["node", "server.js"]
+# Script de inicio que configura todo automáticamente
+COPY --from=builder /app/start.sh ./start.sh
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]

@@ -49,16 +49,7 @@ git checkout main
 # 3. Levantar todo el stack
 docker-compose up -d
 
-# 5. Esperar a que PostgreSQL esté listo (ver "Container rocbird-postgres Healthy")
 
-# 6. Generar cliente Prisma
-docker exec rocbird-app npx prisma generate
-
-# 7. Ejecutar migraciones
-docker exec rocbird-app npx prisma db push
-
-# 8. Poblar con datos de ejemplo
-docker exec rocbird-app npx prisma db seed
 
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
@@ -70,7 +61,6 @@ docker exec rocbird-app npx prisma db seed
 - **Puerto:** `5432`
 
 **⚠️ IMPORTANTE:**
-- **Espera** a que PostgreSQL esté "Healthy" antes de ejecutar comandos
 - **Si algo falla**, usa `docker-compose down -v && docker-compose up -d --build`
 
 
@@ -162,16 +152,7 @@ git checkout main
 # 3. Levantar con Docker
 docker-compose up -d
 
-# 5. Esperar a que PostgreSQL esté "Healthy"
 
-# 6. Generar cliente Prisma
-docker exec rocbird-app npx prisma generate
-
-# 7. Ejecutar migraciones
-docker exec rocbird-app npx prisma db push
-
-# 8. Poblar con datos
-docker exec rocbird-app npx prisma db seed
 
 # ✅ ¡Listo! La aplicación estará en http://localhost:3000
 ```
