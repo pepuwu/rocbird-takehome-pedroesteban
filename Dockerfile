@@ -37,8 +37,12 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 
-# Copiar Prisma client generado
+# Copiar Prisma client y dependencias necesarias
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+
+# Copiar binarios del Query Engine
+COPY --from=builder /app/node_modules/@prisma/engines ./node_modules/@prisma/engines
 
 USER nextjs
 
