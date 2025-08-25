@@ -63,7 +63,22 @@ El tiempo para resolver este takehome será de **7 días** desde el día en el q
 
 ## 🚀 Instalación y Setup
 
-### 1. Clonar e instalar dependencias
+### 🐳 **Opción 1: Docker (Recomendado)**
+```bash
+# Clonar el repositorio
+git clone <tu-repo-url>
+cd rocbird-takehome
+git checkout develop
+
+# Levantar todo el stack con Docker
+docker-compose up -d
+
+# La aplicación estará disponible en http://localhost:3000
+# Prisma Studio en http://localhost:5555
+```
+
+### 💻 **Opción 2: Instalación Local**
+#### 1. Clonar e instalar dependencias
 ```bash
 git clone <tu-repo-url>
 cd rocbird-takehome
@@ -110,6 +125,17 @@ npm run dev
 Abre [http://localhost:3000] en tu navegador para ver el resultado.
 
 ## 📊 Scripts Útiles
+
+### 🐳 **Scripts Docker**
+```bash
+npm run docker:build    # Construir imagen Docker
+npm run docker:up       # Levantar stack completo
+npm run docker:down     # Detener stack
+npm run docker:logs     # Ver logs en tiempo real
+npm run docker:clean    # Limpiar todo (volúmenes incluidos)
+```
+
+### 💻 **Scripts de Desarrollo**
 ```bash
 npm run dev          # Servidor de desarrollo
 npm run db:push      # Sincronizar schema con DB
