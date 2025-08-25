@@ -44,6 +44,10 @@ COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 # Copiar package.json para scripts
 COPY --from=builder /app/package.json ./package.json
 
+# Script de inicio que configura todo automáticamente
+COPY --from=builder /app/start.sh ./start.sh
+RUN chmod +x start.sh
+
 # Cambiar a usuario no-root
 USER nextjs
 
@@ -51,9 +55,5 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
-
-# Script de inicio que configura todo automáticamente
-COPY --from=builder /app/start.sh ./start.sh
-RUN chmod +x start.sh
 
 CMD ["./start.sh"]
