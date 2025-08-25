@@ -16,7 +16,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Generar Prisma client
+# Generar Prisma client con binaryTargets correctos
 RUN npx prisma generate
 
 # Build de la aplicación
@@ -37,13 +37,11 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 
-# Copiar Prisma client y dependencias necesarias
+# Copiar Prisma client generado (con binaryTargets correctos)
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
-# Copiar binarios del Query Engine
-COPY --from=builder /app/node_modules/@prisma/engines ./node_modules/@prisma/engines
-
+# Cambiar a usuario no-root
 USER nextjs
 
 EXPOSE 3000
