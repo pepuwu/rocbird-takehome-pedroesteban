@@ -6,7 +6,9 @@ import {
   createErrorResponse,
   handleApiError,
   createMethodHandler,
-  extractQueryParams
+  extractQueryParams,
+  createPaginatedResponse,
+  calculatePagination
 } from "../../../lib/api-utils";
 
 // ========================================
@@ -16,8 +18,16 @@ import {
 async function GET(request: NextRequest) {
   const queryParams = extractQueryParams(request);
   const talento_id = queryParams.talento_id;
+  const page = parseInt(queryParams.page || "1");
+  const limit = parseInt(queryParams.limit || "10");
   
   const where = talento_id ? { talento_id } : {};
+  
+  // Obtener total de registros
+  const total = await prisma.interaccion.count({ where });
+  
+  // Calcular paginación
+  const skip = (page - 1) * limit;
   
   const interacciones = await prisma.interaccion.findMany({
     where,
@@ -32,9 +42,13 @@ async function GET(request: NextRequest) {
       }
     },
     orderBy: { fecha: "desc" },
+    skip,
+    take: limit,
   });
   
-  return createSuccessResponse(interacciones);
+  const meta = calculatePagination(page, limit, total);
+  
+  return createPaginatedResponse(interacciones, meta);
 }
 
 // ========================================

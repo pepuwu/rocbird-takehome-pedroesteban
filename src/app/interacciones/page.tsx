@@ -67,7 +67,8 @@ export default function InteraccionesPage() {
       }
 
       const data = await response.json();
-      setInteracciones(data);
+      // Usar la nueva estructura con metadatos
+      setInteracciones(data.data || data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
     } finally {
